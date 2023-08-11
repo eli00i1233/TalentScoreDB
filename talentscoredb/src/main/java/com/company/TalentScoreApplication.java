@@ -4,6 +4,7 @@ package com.company;
 import com.company.entity.*;
 import com.company.inter.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -14,109 +15,108 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@RequiredArgsConstructor
 public class TalentScoreApplication {
 
-    private final EducationUserRepository educationUserRepository;
-    private final UserRepository userRepository;
-    private final EducationAnswerRepository educationAnswerRepository;
-    private final EducationQuestionRepository educationQuestionRepository;
+//    @Autowired
+//    private SportQuestionRepository sportQuestionRepository;
+//    @Autowired
+//    private SportAnswerRepository sportAnswerRepository;
+//    @Autowired
+//    private SportUserRepository sportUserRepository;
+//    @Autowired
+//    private UserRepository userRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(TalentScoreApplication.class, args);
     }
 
 
-    @Bean
-    public CommandLineRunner run() {
-        CommandLineRunner clr = new CommandLineRunner() {
-
-            @Transactional
-            @Override
-            public void run(String... args) throws Exception {
-                Integer userId = 1;
-                Integer experienceQuestionId = 1;
-                Integer experienceAnswerId = 1;
-                Integer occupationQuestionId = 2;
-                Integer occupationAnswerId = 5;
-                Integer educationQuestionId = 3;
-                Integer educationAnswerId = 9;
-                Integer universityRateQuestionId = 4;
-                Integer universityRateAnswerId = null;
-
-                User user = userRepository.findById(userId).get();
-                if (user != null) {
-
-                    EducationUser userExperience = new EducationUser();
-                    EducationUser userOccupation = new EducationUser();
-                    EducationUser userEducation = new EducationUser();
-                    EducationUser userUniversityRate = new EducationUser();
-
-                    List<EducationUser> educationUserList = new ArrayList<>();
-
-                    if (experienceAnswerId != null && experienceAnswerId != 0) {
-                        EducationAnswer educationAnswerExperience = educationAnswerRepository.findById(experienceAnswerId).get();
-                        userExperience.setEducationAnswerId(educationAnswerExperience);
-                    }
-                    if (experienceQuestionId != null && experienceQuestionId != 0) {
-                        EducationQuestion educationQuestionExperience = educationQuestionRepository.findById(experienceQuestionId).get();
-                        if (experienceAnswerId != null && experienceAnswerId != 0) {
-                            userExperience.setUserId(user);
-                            userExperience.setEducationQuestionId(educationQuestionExperience);
-                            educationUserList.add(userExperience);
-                        }
-                    }
-
-                    if (occupationAnswerId != null && occupationAnswerId != 0) {
-                        EducationAnswer educationAnswerOccupation = educationAnswerRepository.findById(occupationAnswerId).get();
-                        userOccupation.setEducationAnswerId(educationAnswerOccupation);
-                    }
-
-                    if (occupationQuestionId != null && occupationQuestionId != 0) {
-                        EducationQuestion educationQuestionOccupation = educationQuestionRepository.findById(occupationQuestionId).get();
-
-                        if (occupationAnswerId != null && occupationAnswerId != 0) {
-                            userOccupation.setUserId(user);
-                            userOccupation.setEducationQuestionId(educationQuestionOccupation);
-                            educationUserList.add(userOccupation);
-                        }
-                    }
-
-                    if (educationAnswerId != null && educationAnswerId != 0) {
-                        EducationAnswer educationAnswerEducation = educationAnswerRepository.findById(educationAnswerId).get();
-                        userEducation.setEducationAnswerId(educationAnswerEducation);
-                    }
-
-                    if (educationQuestionId != null && educationQuestionId != 0) {
-                        EducationQuestion educationQuestionEducation = educationQuestionRepository.findById(educationQuestionId).get();
-
-                        if (educationAnswerId != null && educationAnswerId != 0) {
-                            userEducation.setUserId(user);
-                            userEducation.setEducationQuestionId(educationQuestionEducation);
-                            educationUserList.add(userEducation);
-                        }
-                    }
-
-                    if (universityRateAnswerId != null && universityRateAnswerId != 0) {
-                        EducationAnswer educationAnswerUniversityRate = educationAnswerRepository.findById(universityRateAnswerId).get();
-                        userUniversityRate.setEducationAnswerId(educationAnswerUniversityRate);
-                    }
-
-                    if (universityRateQuestionId != null && universityRateQuestionId != 0) {
-                        EducationQuestion educationQuestionUniversityRate = educationQuestionRepository.findById(universityRateQuestionId).get();
-                        if (universityRateAnswerId != null && universityRateAnswerId != 0) {
-                            userUniversityRate.setUserId(user);
-                            userUniversityRate.setEducationQuestionId(educationQuestionUniversityRate);
-                            educationUserList.add(userUniversityRate);
-                        }
-                    }
-
-
-                    educationUserRepository.saveAll(educationUserList);
-                    System.out.println("tamamlandi");
-                }
-            }
-        };
-        return clr;
-    }
+//    @Bean
+//    public CommandLineRunner run() {
+//        CommandLineRunner clr = new CommandLineRunner() {
+//
+//            @Transactional
+//            @Override
+//            public void run(String... args) throws Exception {
+//
+//                Integer sportQuestionId = 1;
+//                Integer sportAnswerId = 2;
+//                Integer whichSportQuestionId = 2;
+//                Integer whichSportAnswerId = 3;
+//                Integer winStage1QuestionId = 3;
+//                Integer winStage1AnswerId = 5;
+//                Integer whichPlace1QuestionId = 4;
+//                Integer whichPlace1RateAnswerId = 6;
+//                User user = userRepository.findById(1).get();
+//                if (user != null) {
+//                    SportUser userSport = new SportUser();
+//                    SportUser userSportName = new SportUser();
+//                    SportUser userStage1 = new SportUser();
+//                    SportUser userPlace1 = new SportUser();
+//                    List<SportUser> sportUserList = new ArrayList<>();
+//
+//                    if (sportAnswerId != null && sportAnswerId != 0) {
+//                        SportAnswer sportAnswer = sportAnswerRepository.findById(sportAnswerId).get();
+//                        userSport.setSportAnswerId(sportAnswer);
+//                    }
+//                    if (sportQuestionId != null && sportQuestionId != 0) {
+//                        SportQuestion sportQuestion = sportQuestionRepository.findById(sportQuestionId).get();
+//                        if (sportAnswerId != null && sportAnswerId != 0) {
+//                            userSport.setUserId(user);
+//                            userSport.setSportQuestionId(sportQuestion);
+//                            sportUserList.add(userSport);
+//                        }
+//                    }
+//
+//                    if (whichSportAnswerId != null && whichSportAnswerId != 0) {
+//                        SportAnswer sportAnswer = sportAnswerRepository.findById(whichSportAnswerId).get();
+//                        userSportName.setSportAnswerId(sportAnswer);
+//                    }
+//
+//                    if (whichSportQuestionId != null && whichSportQuestionId != 0) {
+//                        SportQuestion sportQuestion = sportQuestionRepository.findById(whichSportQuestionId).get();
+//
+//                        if (whichSportAnswerId != null && whichSportAnswerId != 0) {
+//                            userSportName.setUserId(user);
+//                            userSportName.setSportQuestionId(sportQuestion);
+//                            sportUserList.add(userSportName);
+//                        }
+//                    }
+//
+//                    if (winStage1AnswerId != null && winStage1AnswerId != 0) {
+//                        SportAnswer sportAnswer = sportAnswerRepository.findById(winStage1AnswerId).get();
+//                        userStage1.setSportAnswerId(sportAnswer);
+//                    }
+//
+//                    if (winStage1QuestionId != null && winStage1QuestionId != 0) {
+//                        SportQuestion sportQuestion = sportQuestionRepository.findById(winStage1QuestionId).get();
+//
+//                        if (winStage1AnswerId != null && winStage1AnswerId != 0) {
+//                            userStage1.setUserId(user);
+//                            userStage1.setSportQuestionId(sportQuestion);
+//                            sportUserList.add(userStage1);
+//                        }
+//                    }
+//
+//                    if (whichPlace1RateAnswerId != null && whichPlace1RateAnswerId != 0) {
+//                        SportAnswer sportAnswer = sportAnswerRepository.findById(whichPlace1RateAnswerId).get();
+//                        userPlace1.setSportAnswerId(sportAnswer);
+//                    }
+//
+//                    if (whichPlace1QuestionId != null && whichPlace1QuestionId != 0) {
+//                        SportQuestion sportQuestion = sportQuestionRepository.findById(whichPlace1QuestionId).get();
+//                        if (whichPlace1RateAnswerId != null && whichPlace1RateAnswerId != 0) {
+//                            userPlace1.setUserId(user);
+//                            userPlace1.setSportQuestionId(sportQuestion);
+//                            sportUserList.add(userPlace1);
+//                        }
+//                    }
+//
+//                    sportUserRepository.saveAll(sportUserList);
+//                }
+//
+//            }
+//        };
+//        return clr;
+//    }
 }

@@ -26,11 +26,11 @@ public class SportUser {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sport_answer_id", referencedColumnName = "id")
+    @JoinColumn(name = "sport_answers_id", referencedColumnName = "id")
     SportAnswer sportAnswerId;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "sport_question_id", referencedColumnName = "id")
+    @JoinColumn(name = "sport_questions_id", referencedColumnName = "id")
     SportQuestion sportQuestionId;
 }

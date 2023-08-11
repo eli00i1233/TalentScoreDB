@@ -7,6 +7,7 @@ import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Data
 @Entity
@@ -33,5 +34,7 @@ public class ExperienceUser {
     @JoinColumn(name = "experience_question_id", referencedColumnName = "id")
     ExperienceQuestion experienceQuestionId;
     @Column(name = "experience_answers_string")
-    String experienceUserString;
+    String experienceAnswerString;
+    @Column(name = "experience_answers_date")
+    Date experienceAnswerDate;
 }
